@@ -1,5 +1,3 @@
-import fs from 'node:fs'
-import path from 'node:path'
 import { Context, h } from 'koishi'
 import { AudioManager } from '../audio'
 import { Config, DEFAULT_KEYWORDS_IMAGE_URL_LIST } from '../config'
@@ -69,34 +67,15 @@ export function registerListCommand(ctx: Context, config: Config, audioManager: 
     const forceImage = Boolean(options?.image)
     const useImage = forceImage || (!forceText && config.listDisplayMode === 'image')
 
-    // 1. 图文展示模式（图片 + 文本说明；富媒体消息不附加引用）
+    // 1. 图文展示模式（使用 Git 仓库/CDN HTTP 直链，不随 npm 打包，不使用本地 base64/buffer/file）
     if (useImage) {
-      let imageElement: any = null
+      const candidateList = Array.isArray(config.keywordsImageUrls) && config.keywordsImageUrls.length > 0
+        ? config.keywordsImageUrls
+        : DEFAULT_KEYWORDS_IMAGE_URL_LIST
 
-      // 检查本地是否有预生成的图鉴大图，使用 Buffer 二进制发送（避免 file:/// 协议在 QQ/OneBot 平台被拒）
-      const localImagePath = path.resolve(__dirname, '..', '..', 'docs', 'images', 'keywords_overview.png')
-      if (fs.existsSync(localImagePath) && fs.statSync(localImagePath).size > 0) {
-        try {
-          const imageBuffer = fs.readFileSync(localImagePath)
-          imageElement = h.image(imageBuffer, 'image/png')
-        } catch (err) {
-          ctx.logger('studyfa').warn(`读取本地触发词海报失败: ${err}`)
-        }
-      }
-
-      // 否则从多源候选列表中提取第一有效链接（Gitee -> jsDelivr -> GitHub）
-      if (!imageElement) {
-        const candidateList = Array.isArray(config.keywordsImageUrls) && config.keywordsImageUrls.length > 0
-          ? config.keywordsImageUrls
-          : DEFAULT_KEYWORDS_IMAGE_URL_LIST
-
-        const validUrl = candidateList.find(u => typeof u === 'string' && u.trim().length > 0)
-        if (validUrl) {
-          imageElement = h.image(validUrl.trim())
-        }
-      }
-
-      if (imageElement) {
+      const validUrl = candidateList.find(u => typeof u === 'string' && u.trim().length > 0)
+      if (validUrl) {
+        const imageUrl = validUrl.trim()
         const keywordCount = Object.keys(FA_KEYWORD_MAP).length
         const captionText = [
           `📜 【学Fa♂音 全量触发词图鉴】（共收录 ${keywordCount} 个关键词）`,
@@ -105,7 +84,7 @@ export function registerListCommand(ctx: Context, config: Config, audioManager: 
         ].join('\n')
 
         try {
-          await session.send([imageElement, '\n' + captionText])
+          await session.send([h.image(imageUrl), '\n' + captionText])
           return
         } catch (err) {
           ctx.logger('studyfa').warn(`发送图文消息失败，自动回退纯文本: ${err}`)

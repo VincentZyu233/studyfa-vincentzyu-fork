@@ -9,6 +9,7 @@ export const DEFAULT_DOWNLOAD_MIRROR_URL_LIST = [
 
 export const DEFAULT_KEYWORDS_IMAGE_URL_LIST = [
   'https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork/raw/main/docs/images/keywords_overview.png',
+  'https://gh-proxy.com/https://raw.githubusercontent.com/VincentZyu233/studyfa-vincentzyu-fork/main/docs/images/keywords_overview.png',
   'https://cdn.jsdelivr.net/gh/VincentZyu233/studyfa-vincentzyu-fork@main/docs/images/keywords_overview.png',
   'https://raw.githubusercontent.com/VincentZyu233/studyfa-vincentzyu-fork/main/docs/images/keywords_overview.png',
 ]
