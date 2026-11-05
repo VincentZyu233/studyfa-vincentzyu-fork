@@ -86,7 +86,7 @@ python3 scripts/download_pack.py --proxy http://127.0.0.1:7890 --force
 
 | 配置项 | 类型 | 默认值 | 说明 |
 | :--- | :--- | :--- | :--- |
-| `enableListener` | `boolean` | `true` | 是否开启群聊触发词被动监听 |
+| `triggerMode` | `'always' \| 'command_only' \| 'disabled'` | `'always'` | 哲学语音条触发检测档位（全群自由触发 / 指令显式触发 / 彻底禁用） |
 | `replyProbability` | `number` | `1.0` | 捕获到触发词时的回复概率（0.05 ~ 1.0） |
 | `replyQuote` | `boolean` | `false` | 发送语音条时是否引用触发消息 |
 | `audioSourceStrategy` | `'local_first' \| 'remote_first' \| 'local_only' \| 'remote_only'` | `'local_first'` | 音频获取策略（先B再A/先A再B/只有B/只有A） |

@@ -36,16 +36,52 @@ export function apply(ctx: Context, config: Config) {
   // 2. 注册指令与子指令
   registerListCommand(ctx, config, audioManager)
 
-  // 3. 注册中间件被动监听聊天触发词
+  // 3. 注册中间件监听聊天触发词
   ctx.middleware(async (session, next) => {
-    if (!config.enableListener) return next()
+    // 档位判定，兼容旧版配置 enableListener
+    const mode = config.triggerMode ?? (config.enableListener === false ? 'disabled' : 'always')
+    if (mode === 'disabled') return next()
 
     // 提取纯文本内容
-    const text = h.select(session.elements, 'text')
+    let text = h.select(session.elements, 'text')
       .map(item => item.attrs.content)
       .join('')
+      .trim()
 
-    if (!text || text.trim().length === 0) return next()
+    if (!text || text.length === 0) return next()
+
+    // 档位 2：必须以指令名开头
+    if (mode === 'command_only') {
+      const allPrefixes = [config.commandName, ...(config.commandAliases || [])]
+        .filter(p => typeof p === 'string' && p.trim().length > 0)
+        .map(p => p.trim())
+
+      // 允许可选前置标点符号 [/!#.。／#]，并匹配指令名，后面跟随空白字符或直接连接汉字/拼音字母
+      const escapeRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      const prefixPattern = new RegExp(`^(?:[/!#.。／#]?)\\s*(${allPrefixes.map(escapeRegex).join('|')})(?:\\s+|(?=[\\u4e00-\\u9fa5a-zA-Z]))`, 'i')
+      const match = text.match(prefixPattern)
+
+      if (!match) {
+        // 没有以指令名开头，放行
+        return next()
+      }
+
+      // 剥离指令前缀部分
+      text = text.slice(match[0].length).trim()
+
+      // 如果剥离后没有内容（说明用户只发了例如 "/fa"），放行给指令 action 展示帮助
+      if (!text) return next()
+
+      // 如果剥离后的内容以 '.' 开头或是 'list'、'列表' 等子指令，放行给子指令逻辑
+      const subNames = [config.listCommandName, ...(config.listCommandAliases || []), 'list', '列表']
+        .filter(Boolean)
+        .map(s => s.trim().toLowerCase())
+
+      const lowerText = text.toLowerCase()
+      if (text.startsWith('.') || subNames.includes(lowerText)) {
+        return next()
+      }
+    }
 
     // 匹配中文与英文字母（与原版逻辑保持一致）
     const matchedChars = text.match(/[\u4e00-\u9fa5a-zA-Z]/g)

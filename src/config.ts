@@ -15,10 +15,12 @@ export const DEFAULT_KEYWORDS_IMAGE_URL_LIST = [
 ]
 
 export type AudioSourceStrategy = 'local_first' | 'remote_first' | 'local_only' | 'remote_only'
+export type TriggerMode = 'always' | 'command_only' | 'disabled'
 
 export interface Config {
   // ===== 🎙️ 语音监听与响应设置 =====
-  enableListener: boolean // 👂 是否开启群聊触发词被动监听
+  triggerMode: TriggerMode // 📻 哲学语音条触发检测档位（单选框）
+  enableListener?: boolean // 👂 （已平滑迁移至 triggerMode，保留兼容旧配置）
   replyProbability: number // 🎲 匹配成功时的响应概率（0.1 ~ 1.0）
   replyQuote: boolean // 💬 发送哲学语音时是否引用触发消息
   audioSourceStrategy: AudioSourceStrategy // 🎙️ 音频资源获取与回退策略（单选框）
@@ -45,9 +47,14 @@ export interface Config {
 export const Config: Schema<Config> = Schema.intersect([
   // ===== 🎙️ 语音监听与响应设置 =====
   Schema.object({
-    enableListener: Schema.boolean()
-      .default(true)
-      .description('👂 是否开启群聊与频道消息中的哲学触发词被动监听（匹配后随机发送对应语音）'),
+    triggerMode: Schema.union([
+      Schema.const('always').description('🗣️ 全群自由触发（默认）：只要消息匹配到触发词就发送语音（原版体验）'),
+      Schema.const('command_only').description('🎯 指令显式触发：必须以指令名（如 fa、/fa、学fa音）开头才触发'),
+      Schema.const('disabled').description('🚫 彻底禁用：完全不触发哲学语音条（保留词库图鉴等指令）'),
+    ])
+      .role('radio')
+      .default('always')
+      .description('📻 哲学语音条触发检测档位'),
     replyProbability: Schema.number()
       .min(0.05)
       .max(1.0)
