@@ -103,6 +103,7 @@ html.dark .k-notice-title, .dark .k-notice-title { color: #63b3ed !important; }
     本插件针对原版（依赖单一私人服务器易失效）进行了重大升级：**已将全量 205 段音频打包为离线资源包**，并支持多源备份镜像（Gitee ➔ gh-proxy ➔ GitHub）。
   </p>
   <ul style="margin: 4px 0 0 18px; padding: 0;">
+    <li><b>音频策略选择 (audioSourceStrategy)</b>：支持 4 种模式自由切换（先本地再回退远程 / 先远程再回退本地 / 纯离线零外网 / 纯远程不占磁盘）。</li>
     <li><b>首选直连</b>：Gitee 公开镜像源（国内服务器免代理，秒级快速拉取）。</li>
     <li><b>代理选项</b>：若内网受限，可开启配置项 <code>useDownloadProxy</code> 并填写 <code>downloadProxyUrl</code>（默认 <code>http://127.0.0.1:7890</code>）。</li>
     <li><b>Python 离线预热</b>：可在服务器终端执行自带脚本：<br>

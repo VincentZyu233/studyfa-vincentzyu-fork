@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { Context, h } from 'koishi'
-import { AudioManager } from '../audio-manager'
+import { AudioManager } from '../audio'
 import { Config, DEFAULT_KEYWORDS_IMAGE_URL_LIST } from '../config'
 import { FA_KEYWORD_MAP } from '../data/keywords'
 

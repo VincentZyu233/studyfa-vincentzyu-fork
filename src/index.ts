@@ -1,12 +1,12 @@
 import { Context, h } from 'koishi'
-import { AudioManager } from './audio-manager'
+import { AudioManager } from './audio'
 import { registerListCommand } from './commands/list'
 import { Config } from './config'
 import { FA_KEYWORD_MAP } from './data/keywords'
 import { usage } from './usage'
 
 export * from './config'
-export * from './audio-manager'
+export * from './audio'
 export * from './data/keywords'
 export { usage }
 
@@ -57,7 +57,7 @@ export function apply(ctx: Context, config: Config) {
           return next()
         }
 
-        const audioUrl = audioManager.getAudioUrlForKeyword(keyword)
+        const audioUrl = audioManager.getAudioUrlForKeyword(keyword, config.audioSourceStrategy)
         if (audioUrl) {
           logger.debug(`Triggered keyword: [${keyword}], sending audio: ${audioUrl}`)
           const elements: any[] = []

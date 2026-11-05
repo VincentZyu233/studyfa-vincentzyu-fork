@@ -3,7 +3,7 @@ import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import AdmZip from 'adm-zip'
 import { Context, Logger } from 'koishi'
-import { DEFAULT_DOWNLOAD_MIRROR_URL_LIST } from './config'
+import { AudioSourceStrategy, DEFAULT_DOWNLOAD_MIRROR_URL_LIST } from './config'
 import { FA_KEYWORD_MAP } from './data/keywords'
 
 export class AudioManager {
@@ -101,22 +101,43 @@ export class AudioManager {
   }
 
   /**
-   * 根据关键词获取随机一段音频的可播放地址（本地优先，网络兜底）
+   * 根据关键词获取随机一段音频的可播放地址（根据配置的四种策略解析）
+   * @param keyword 触发词
+   * @param strategy 获取策略（local_first | remote_first | local_only | remote_only）
    */
-  public getAudioUrlForKeyword(keyword: string): string | null {
+  public getAudioUrlForKeyword(
+    keyword: string,
+    strategy: AudioSourceStrategy = 'local_first',
+  ): string | null {
     const filenames = FA_KEYWORD_MAP[keyword]
     if (!filenames || filenames.length === 0) return null
 
     const chosenFile = filenames[Math.floor(Math.random() * filenames.length)]
-
-    // 1. 优先使用本地文件
     const localFilePath = path.join(this.audioDir, chosenFile)
-    if (fs.existsSync(localFilePath) && fs.statSync(localFilePath).size > 0) {
-      return pathToFileURL(localFilePath).href
-    }
-
-    // 2. 本地不存在时，优雅回退到原上游在线源
+    const hasLocal = fs.existsSync(localFilePath) && fs.statSync(localFilePath).size > 0
+    const localUrl = pathToFileURL(localFilePath).href
     const encodedName = encodeURIComponent(chosenFile)
-    return `http://smmcat.cn/run/fa/${encodedName}`
+    const remoteUrl = `http://smmcat.cn/run/fa/${encodedName}`
+
+    switch (strategy) {
+      case 'local_first': // 先 B 再 A（默认推荐）
+        return hasLocal ? localUrl : remoteUrl
+
+      case 'remote_first': // 先 A 再 B
+        return remoteUrl || (hasLocal ? localUrl : null)
+
+      case 'local_only': // 只有 B（纯离线）
+        if (!hasLocal) {
+          this.logger.warn(`[local_only 模式] 缺失本地离线音频文件: ${chosenFile}，请先执行 download_pack.py`)
+          return null
+        }
+        return localUrl
+
+      case 'remote_only': // 只有 A（纯远程上游）
+        return remoteUrl
+
+      default:
+        return hasLocal ? localUrl : remoteUrl
+    }
   }
 }

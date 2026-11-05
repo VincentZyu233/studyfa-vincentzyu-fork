@@ -74,6 +74,7 @@ python3 scripts/download_pack.py --proxy http://127.0.0.1:7890 --force
 | `enableListener` | `boolean` | `true` | 是否开启群聊触发词被动监听 |
 | `replyProbability` | `number` | `1.0` | 捕获到触发词时的回复概率（0.05 ~ 1.0） |
 | `replyQuote` | `boolean` | `false` | 发送语音条时是否引用触发消息 |
+| `audioSourceStrategy` | `'local_first' \| 'remote_first' \| 'local_only' \| 'remote_only'` | `'local_first'` | 音频获取策略（先B再A/先A再B/只有B/只有A） |
 | `commandName` | `string` | `studyfa` | 主指令名称 |
 | `commandAliases` | `string[]` | `fa`、`学fa音`、`哲学` 等 | 主指令别名列表 |
 | `listCommandName` | `string` | `.list` | 触发词列表子指令名 |

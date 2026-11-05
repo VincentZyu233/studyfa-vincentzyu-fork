@@ -13,11 +13,14 @@ export const DEFAULT_KEYWORDS_IMAGE_URL_LIST = [
   'https://raw.githubusercontent.com/VincentZyu233/studyfa-vincentzyu-fork/main/docs/images/keywords_overview.png',
 ]
 
+export type AudioSourceStrategy = 'local_first' | 'remote_first' | 'local_only' | 'remote_only'
+
 export interface Config {
   // ===== 🎙️ 语音监听与响应设置 =====
   enableListener: boolean // 👂 是否开启群聊触发词被动监听
   replyProbability: number // 🎲 匹配成功时的响应概率（0.1 ~ 1.0）
   replyQuote: boolean // 💬 发送哲学语音时是否引用触发消息
+  audioSourceStrategy: AudioSourceStrategy // 🎙️ 音频资源获取与回退策略（单选框）
 
   // ===== 📌 指令与别名设置 =====
   commandName: string // 📌 主指令名称（默认 studyfa）
@@ -52,6 +55,15 @@ export const Config: Schema<Config> = Schema.intersect([
     replyQuote: Schema.boolean()
       .default(false)
       .description('💬 发送语音条时是否引用触发者的消息（OneBot 语音条建议关闭引用以获得最佳体验）'),
+    audioSourceStrategy: Schema.union([
+      Schema.const('local_first').description('💾 先 B 再 A（默认推荐）：本地优先，本地缺失时自动回退远程上游 URL'),
+      Schema.const('remote_first').description('🌐 先 A 再 B：远程优先，远程受阻/失败时回退本地切片'),
+      Schema.const('local_only').description('🔒 只有 B（纯离线）：仅使用本地解压的音频，零外部音频网络请求'),
+      Schema.const('remote_only').description('☁️ 只有 A（纯远程）：仅使用原版 smmcat.cn 远程音频，完全不占本地磁盘'),
+    ])
+      .role('radio')
+      .default('local_first')
+      .description('🎙️ 音频资源获取与回退策略（A: 原版远程 smmcat.cn；B: GitHub/Gitee Release 离线切片）'),
   }).description('🎙️ 语音监听与响应设置 💬'),
 
   // ===== 📌 指令与别名设置 =====
