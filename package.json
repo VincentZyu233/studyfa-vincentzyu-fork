@@ -4,11 +4,11 @@
   "version": "0.1.0+20261105",
   "repository": {
     "type": "git",
-    "url": "https://github.com/VincentZyuApps/studyfa-vincentzyu-fork.git"
+    "url": "https://github.com/VincentZyu233/studyfa-vincentzyu-fork.git"
   },
-  "homepage": "https://github.com/VincentZyuApps/studyfa-vincentzyu-fork#readme",
+  "homepage": "https://github.com/VincentZyu233/studyfa-vincentzyu-fork#readme",
   "bugs": {
-    "url": "https://github.com/VincentZyuApps/studyfa-vincentzyu-fork/issues"
+    "url": "https://github.com/VincentZyu233/studyfa-vincentzyu-fork/issues"
   },
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",

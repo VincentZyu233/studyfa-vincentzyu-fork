@@ -83,7 +83,7 @@ html.dark .k-notice-title, .dark .k-notice-title { color: #63b3ed !important; }
   <a href="https://www.npmjs.com/package/koishi-plugin-studyfa-vincentzyu-fork" target="_blank">
     <img src="https://img.shields.io/npm/v/koishi-plugin-studyfa-vincentzyu-fork?style=flat-square&logo=npm" alt="npm version">
   </a>
-  <a href="https://github.com/VincentZyuApps/studyfa-vincentzyu-fork" target="_blank">
+  <a href="https://github.com/VincentZyu233/studyfa-vincentzyu-fork" target="_blank">
     <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
   </a>
   <a href="https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork" target="_blank">

@@ -2,15 +2,15 @@ import { Schema } from 'koishi'
 
 export const DEFAULT_DOWNLOAD_MIRROR_URL_LIST = [
   'https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork/releases/download/v0.1.0',
-  'https://gh-proxy.com/https://github.com/VincentZyuApps/studyfa-vincentzyu-fork/releases/download/v0.1.0',
-  'https://ghproxy.net/https://github.com/VincentZyuApps/studyfa-vincentzyu-fork/releases/download/v0.1.0',
-  'https://github.com/VincentZyuApps/studyfa-vincentzyu-fork/releases/download/v0.1.0',
+  'https://gh-proxy.com/https://github.com/VincentZyu233/studyfa-vincentzyu-fork/releases/download/v0.1.0',
+  'https://ghproxy.net/https://github.com/VincentZyu233/studyfa-vincentzyu-fork/releases/download/v0.1.0',
+  'https://github.com/VincentZyu233/studyfa-vincentzyu-fork/releases/download/v0.1.0',
 ]
 
 export const DEFAULT_KEYWORDS_IMAGE_URL_LIST = [
   'https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork/raw/main/docs/images/keywords_overview.png',
-  'https://cdn.jsdelivr.net/gh/VincentZyuApps/studyfa-vincentzyu-fork@main/docs/images/keywords_overview.png',
-  'https://raw.githubusercontent.com/VincentZyuApps/studyfa-vincentzyu-fork/main/docs/images/keywords_overview.png',
+  'https://cdn.jsdelivr.net/gh/VincentZyu233/studyfa-vincentzyu-fork@main/docs/images/keywords_overview.png',
+  'https://raw.githubusercontent.com/VincentZyu233/studyfa-vincentzyu-fork/main/docs/images/keywords_overview.png',
 ]
 
 export interface Config {
