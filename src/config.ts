@@ -24,7 +24,7 @@ export interface Config {
   audioSourceStrategy: AudioSourceStrategy // 🎙️ 音频资源获取与回退策略（单选框）
 
   // ===== 📌 指令与别名设置 =====
-  enableQuote: boolean // 💬 bot 发送文本消息时是否引用触发指令的消息（仅对纯文本消息生效）
+  enableQuote: boolean // 💬 bot 发送消息时是否引用触发指令的消息
   commandName: string // 📌 主指令名称（默认 studyfa）
   commandAliases: string[] // 🏷️ 主指令别名列表
   listCommandName: string // 📋 触发词列表子指令名（默认 .list）
@@ -72,7 +72,7 @@ export const Config: Schema<Config> = Schema.intersect([
   Schema.object({
     enableQuote: Schema.boolean()
       .default(true)
-      .description('💬 bot 发送文本消息时是否引用触发指令的消息（仅对纯文本消息生效，含图富媒体消息不引用）'),
+      .description('💬 bot 发送消息时是否引用触发指令的消息'),
     commandName: Schema.string()
       .default('studyfa')
       .description('📌 主指令名称（如 studyfa、fa）'),

@@ -24,8 +24,12 @@ export function registerListCommand(ctx: Context, config: Config, audioManager: 
       `📋 查看全量图鉴：使用指令 /${config.commandName} ${config.listCommandName}（或 /fa .list）`,
     ].join('\n')
 
-    const quotePrefix = config.enableQuote && session.messageId ? h.quote(session.messageId) : ''
-    return `${quotePrefix}${text}`
+    const messageElements: any[] = []
+    if (config.enableQuote && session.messageId) {
+      messageElements.push(h.quote(session.messageId))
+    }
+    messageElements.push(text)
+    await session.send(messageElements)
   })
 
   // 注册子指令：列出所有触发词
@@ -83,8 +87,15 @@ export function registerListCommand(ctx: Context, config: Config, audioManager: 
           `📝 如需纯文本分栏列表，可使用指令：/${config.commandName} ${config.listCommandName} -t`,
         ].join('\n')
 
+        const messageElements: any[] = []
+        if (config.enableQuote && session.messageId) {
+          messageElements.push(h.quote(session.messageId))
+        }
+        messageElements.push(h.image(imageUrl))
+        messageElements.push('\n' + captionText)
+
         try {
-          await session.send([h.image(imageUrl), '\n' + captionText])
+          await session.send(messageElements)
           return
         } catch (err) {
           ctx.logger('studyfa').warn(`发送图文消息失败，自动回退纯文本: ${err}`)
@@ -110,7 +121,11 @@ export function registerListCommand(ctx: Context, config: Config, audioManager: 
     lines.push('----------------------------------------')
     lines.push('💡 提示：在聊天中直接发送以上任意词汇即可触发对应音频！')
 
-    const quotePrefix = config.enableQuote && session.messageId ? h.quote(session.messageId) : ''
-    return `${quotePrefix}${lines.join('\n')}`
+    const messageElements: any[] = []
+    if (config.enableQuote && session.messageId) {
+      messageElements.push(h.quote(session.messageId))
+    }
+    messageElements.push(lines.join('\n'))
+    await session.send(messageElements)
   })
 }
