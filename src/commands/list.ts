@@ -14,23 +14,26 @@ export function registerListCommand(ctx: Context, config: Config, audioManager: 
     }
   }
 
-  // 注册主指令本身行为：若直接调用 /fa 不带参数，显示帮助引导
+  // 注册主指令本身行为：若直接调用 /fa 不带参数，显示帮助引导（纯文本模式，支持引用）
   mainCmd.action(async ({ session }) => {
     if (!session) return
     const audioCount = audioManager.getInstalledAudioCount()
     const keywordCount = Object.keys(FA_KEYWORD_MAP).length
 
-    return [
+    const text = [
       `📻 【学Fa♂音 哲学互动】已就绪`,
       `📦 词库收录：${keywordCount} 个关键词 · ${audioCount > 0 ? `本地已就绪 ${audioCount} 个音频` : '网络兜底模式'}`,
       `💡 使用方式：在聊天中直接发送关键词（如 "乖乖站好"、"搞死你"、"faq" 等）即可触发！`,
       `📋 查看全量图鉴：使用指令 /${config.commandName} ${config.listCommandName}（或 /fa .list）`,
     ].join('\n')
+
+    const quotePrefix = config.enableQuote && session.messageId ? h.quote(session.messageId) : ''
+    return `${quotePrefix}${text}`
   })
 
   // 注册子指令：列出所有触发词
   const listCmd = mainCmd.subcommand(config.listCommandName, '查看全量学Fa♂音触发词图鉴')
-    .option('text', '-t 强制以文本模式输出触发词列表')
+    .option('text', '-t 强制以纯文本模式输出触发词列表')
     .option('image', '-i 强制以图鉴海报大图输出')
 
   if (Array.isArray(config.listCommandAliases)) {
@@ -46,26 +49,38 @@ export function registerListCommand(ctx: Context, config: Config, audioManager: 
     const forceImage = Boolean(options?.image)
     const useImage = forceImage || (!forceText && config.listDisplayMode === 'image')
 
-    // 1. 图片展示模式
+    // 1. 图文展示模式（图片 + 文本说明；富媒体消息不附加引用）
     if (useImage) {
+      let imgUrl: string | null = null
+
       // 检查本地是否有预生成的图鉴大图
       const localImagePath = path.resolve(__dirname, '..', '..', 'docs', 'images', 'keywords_overview.png')
       if (fs.existsSync(localImagePath) && fs.statSync(localImagePath).size > 0) {
-        return h.image(pathToFileURL(localImagePath).href)
+        imgUrl = pathToFileURL(localImagePath).href
+      } else {
+        // 否则从多源候选列表中提取第一有效链接（Gitee -> jsDelivr -> GitHub）
+        const candidateList = Array.isArray(config.keywordsImageUrls) && config.keywordsImageUrls.length > 0
+          ? config.keywordsImageUrls
+          : DEFAULT_KEYWORDS_IMAGE_URL_LIST
+
+        const validUrl = candidateList.find(u => typeof u === 'string' && u.trim().length > 0)
+        if (validUrl) imgUrl = validUrl.trim()
       }
 
-      // 否则从多源候选列表中提取第一有效链接（Gitee -> jsDelivr -> GitHub）
-      const candidateList = Array.isArray(config.keywordsImageUrls) && config.keywordsImageUrls.length > 0
-        ? config.keywordsImageUrls
-        : DEFAULT_KEYWORDS_IMAGE_URL_LIST
+      if (imgUrl) {
+        const keywordCount = Object.keys(FA_KEYWORD_MAP).length
+        const captionText = [
+          `📜 【学Fa♂音 全量触发词图鉴】（共收录 ${keywordCount} 个关键词）`,
+          `💡 提示：在聊天中直接发送图中任意词汇即可触发对应音频！`,
+          `📝 如需纯文本分栏列表，可使用指令：/${config.commandName} ${config.listCommandName} -t`,
+        ].join('\n')
 
-      const validUrl = candidateList.find(u => typeof u === 'string' && u.trim().length > 0)
-      if (validUrl) {
-        return h.image(validUrl.trim())
+        // 返回图片 + 文本（富媒体消息不引用，避免部分客户端吞图或排版异常）
+        return `${h.image(imgUrl)}\n${captionText}`
       }
     }
 
-    // 2. 文本展示模式（排版整齐的分栏）
+    // 2. 纯文本展示模式（排版整齐的分栏；纯文本消息生效引用）
     const keywords = Object.keys(FA_KEYWORD_MAP)
     keywords.sort((a, b) => a.localeCompare(b, 'zh-Hans-CN'))
 
@@ -83,6 +98,7 @@ export function registerListCommand(ctx: Context, config: Config, audioManager: 
     lines.push('----------------------------------------')
     lines.push('💡 提示：在聊天中直接发送以上任意词汇即可触发对应音频！')
 
-    return lines.join('\n')
+    const quotePrefix = config.enableQuote && session.messageId ? h.quote(session.messageId) : ''
+    return `${quotePrefix}${lines.join('\n')}`
   })
 }

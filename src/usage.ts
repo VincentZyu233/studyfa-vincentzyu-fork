@@ -132,9 +132,9 @@ html.dark .k-notice-title, .dark .k-notice-title { color: #63b3ed !important; }
   <p><b>1. 被动触发（无需指令前缀）：</b>在开启监听的群内，直接发送收录的触发词（如 <code>乖乖站好</code>、<code>搞死你</code>、<code>faq</code>、<code>幻灭吧</code> 等），机器人将自动发出对应的哲学音频语音条！</p>
   <p><b>2. 主指令：</b><code>studyfa</code>（别名 <code>fa</code>、<code>学fa音</code>、<code>哲学</code>）</p>
   <div style="${codeBlockStyle}">
-    <div>/fa —— 查看插件状态与关键词统计</div>
-    <div>/fa .list —— 渲染并发送全量 105 个触发词图鉴大图</div>
-    <div>/fa .list -t —— 以纯文本模式列出触发词列表（省流模式）</div>
+    <div>/fa —— 查看插件状态与关键词统计（纯文本，遵循 enableQuote 引用设置）</div>
+    <div>/fa .list —— 发送全量 105 个触发词图鉴大图 + 说明文本</div>
+    <div>/fa .list -t —— 以纯文本分栏模式列出触发词列表（省流模式，遵循 enableQuote 引用设置）</div>
   </div>
 </div>
 </details>
