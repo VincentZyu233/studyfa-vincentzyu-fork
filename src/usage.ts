@@ -1,5 +1,7 @@
 const pkg = require('../package.json')
 
+const KOISHI_LOGO_BASE64 = 'data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAABU0lEQVR42p2UQSsFYRSGnxnqLuytKWKpKFkQNsS%2FsOHPWPADLCmxU5S7UzYWNrJR7lYiRF2FeWzOMKZ7mXHqNNP5vvP2nu%2B850CY2lP4X1K31ZbaDm%2BpO%2Bpyp5wfAXVEPfRvO1JHf4AVQGbUh7j4EZ4VkrNCXPVRnf3CUBN1SH2KC28VGOV3ntRhNclZHdcAKYM11QR1oVBOXctzFlNgBTC8qmXxPQEegbVeYApIgJT6tg%2F0AdMp0B%2FBpCabK2AAmAAa%2F2GRBft1oBFPkqTAba7LCiAfQC9wClwAY1HJHepuiO29Yrsf1Dn1uiDU3RTYCtTkl1Leg8k9MB4NGgReI28rV3azgyCz0og01Xl1Uz1QX8uCTELm3UbkTF1VJ9Wr0tn3iBSGdjYG0XivE3VN3VD31PM4a3cc2tIGGI0VkTO7rLxGuiy25ejmjfqsvkSXui62TxaK03td4FXTAAAAAElFTkSuQmCC'
+
 const baseDetailsStyle = 'margin:12px 0;border-radius:10px;overflow:hidden;box-shadow:var(--k-card-shadow, 0 1px 4px rgb(0 0 0 / 10%));border:1px solid var(--card-border, rgba(127, 127, 127, 0.3));background:var(--k-card-bg, transparent);transition:border-color .2s ease, background-color .2s ease;'
 const baseSummaryStyle = 'padding:10px 14px;cursor:pointer;user-select:none;font-weight:700;display:flex;align-items:center;justify-content:space-between;outline:none;background:var(--card-summary-bg, rgba(127, 127, 127, 0.12));color:var(--card-title-color, var(--k-text-dark, #f5f5f5));'
 const baseBodyStyle = 'padding:10px 16px 14px;color:var(--k-text-dark, inherit);line-height:1.75;font-size:14px;border-top:1px solid var(--card-border, rgba(127, 127, 127, 0.2));background:var(--k-card-bg, transparent);'
@@ -83,15 +85,24 @@ html.dark .k-notice-title, .dark .k-notice-title { color: #63b3ed !important; }
   <a href="https://www.npmjs.com/package/koishi-plugin-studyfa-vincentzyu-fork" target="_blank">
     <img src="https://img.shields.io/npm/v/koishi-plugin-studyfa-vincentzyu-fork?style=flat-square&logo=npm" alt="npm version">
   </a>
+  <a href="https://npm-stat.com/charts.html?package=koishi-plugin-studyfa-vincentzyu-fork" target="_blank">
+    <img src="https://img.shields.io/npm/dm/koishi-plugin-studyfa-vincentzyu-fork?style=flat-square&logo=npm" alt="npm downloads">
+  </a>
+  <br>
   <a href="https://github.com/VincentZyu233/studyfa-vincentzyu-fork" target="_blank">
     <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
   </a>
   <a href="https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork" target="_blank">
     <img src="https://img.shields.io/badge/Gitee-C71D23?style=for-the-badge&logo=gitee&logoColor=white" alt="Gitee">
   </a>
+  <br>
+  <a href="https://forum.koishi.xyz/t/topic/xxxxx" target="_blank">
+    <img src="https://img.shields.io/badge/Koishi%20Forum-xxxxx-5546A3?style=for-the-badge&logo=${KOISHI_LOGO_BASE64}&logoColor=white" alt="Koishi Forum">
+  </a>
   <a href="https://qm.qq.com/q/ZHj33L5cuC" target="_blank">
     <img src="https://img.shields.io/badge/QQ群-1085190201-12B7F5?style=flat-square&logo=qq&logoColor=white" alt="QQ群">
   </a>
+  <br>
 </p>
 
 <p><b>💬 交流反馈：</b>欢迎加入 QQ 群 <b>1085190201</b>，在群里直接艾特我，回复更快哦~ ✨</p>

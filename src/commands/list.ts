@@ -1,6 +1,5 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { pathToFileURL } from 'node:url'
 import { Context, h } from 'koishi'
 import { AudioManager } from '../audio'
 import { Config, DEFAULT_KEYWORDS_IMAGE_URL_LIST } from '../config'
@@ -36,10 +35,31 @@ export function registerListCommand(ctx: Context, config: Config, audioManager: 
     .option('text', '-t 强制以纯文本模式输出触发词列表')
     .option('image', '-i 强制以图鉴海报大图输出')
 
+  const aliasCandidates = new Set<string>()
   if (Array.isArray(config.listCommandAliases)) {
     for (const alias of config.listCommandAliases) {
-      if (alias && alias.trim()) listCmd.alias(alias.trim())
+      if (alias && alias.trim()) aliasCandidates.add(alias.trim())
     }
+  }
+
+  // 显式为子指令注入父前缀别名（如 fa.list, fa .list, falist, fa列表 等），彻底避免无空格别名无法匹配
+  const parentNames = [config.commandName, ...(config.commandAliases || [])]
+  for (const pName of parentNames) {
+    if (!pName || !pName.trim()) continue
+    const cleanP = pName.trim()
+    const dotSub = config.listCommandName.startsWith('.') ? config.listCommandName : `.${config.listCommandName}`
+    const rawSub = dotSub.replace(/^\.+/, '')
+
+    aliasCandidates.add(`${cleanP}${dotSub}`)   // 如 fa.list, studyfa.list
+    aliasCandidates.add(`${cleanP} ${dotSub}`)  // 如 fa .list
+    aliasCandidates.add(`${cleanP}${rawSub}`)    // 如 falist
+    aliasCandidates.add(`${cleanP} ${rawSub}`)   // 如 fa list
+    aliasCandidates.add(`${cleanP}列表`)        // 如 fa列表
+    aliasCandidates.add(`${cleanP}.列表`)       // 如 fa.列表
+  }
+
+  for (const alias of aliasCandidates) {
+    listCmd.alias(alias)
   }
 
   listCmd.action(async ({ session, options }) => {
@@ -51,23 +71,32 @@ export function registerListCommand(ctx: Context, config: Config, audioManager: 
 
     // 1. 图文展示模式（图片 + 文本说明；富媒体消息不附加引用）
     if (useImage) {
-      let imgUrl: string | null = null
+      let imageElement: any = null
 
-      // 检查本地是否有预生成的图鉴大图
+      // 检查本地是否有预生成的图鉴大图，使用 Buffer 二进制发送（避免 file:/// 协议在 QQ/OneBot 平台被拒）
       const localImagePath = path.resolve(__dirname, '..', '..', 'docs', 'images', 'keywords_overview.png')
       if (fs.existsSync(localImagePath) && fs.statSync(localImagePath).size > 0) {
-        imgUrl = pathToFileURL(localImagePath).href
-      } else {
-        // 否则从多源候选列表中提取第一有效链接（Gitee -> jsDelivr -> GitHub）
+        try {
+          const imageBuffer = fs.readFileSync(localImagePath)
+          imageElement = h.image(imageBuffer, 'image/png')
+        } catch (err) {
+          ctx.logger('studyfa').warn(`读取本地触发词海报失败: ${err}`)
+        }
+      }
+
+      // 否则从多源候选列表中提取第一有效链接（Gitee -> jsDelivr -> GitHub）
+      if (!imageElement) {
         const candidateList = Array.isArray(config.keywordsImageUrls) && config.keywordsImageUrls.length > 0
           ? config.keywordsImageUrls
           : DEFAULT_KEYWORDS_IMAGE_URL_LIST
 
         const validUrl = candidateList.find(u => typeof u === 'string' && u.trim().length > 0)
-        if (validUrl) imgUrl = validUrl.trim()
+        if (validUrl) {
+          imageElement = h.image(validUrl.trim())
+        }
       }
 
-      if (imgUrl) {
+      if (imageElement) {
         const keywordCount = Object.keys(FA_KEYWORD_MAP).length
         const captionText = [
           `📜 【学Fa♂音 全量触发词图鉴】（共收录 ${keywordCount} 个关键词）`,
@@ -75,8 +104,12 @@ export function registerListCommand(ctx: Context, config: Config, audioManager: 
           `📝 如需纯文本分栏列表，可使用指令：/${config.commandName} ${config.listCommandName} -t`,
         ].join('\n')
 
-        // 返回图片 + 文本（富媒体消息不引用，避免部分客户端吞图或排版异常）
-        return `${h.image(imgUrl)}\n${captionText}`
+        try {
+          await session.send([imageElement, '\n' + captionText])
+          return
+        } catch (err) {
+          ctx.logger('studyfa').warn(`发送图文消息失败，自动回退纯文本: ${err}`)
+        }
       }
     }
 
