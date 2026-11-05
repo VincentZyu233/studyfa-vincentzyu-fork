@@ -25,12 +25,22 @@
 
 > 🙏 **上游致谢**：本项目基于社区原作者 [@smmcat](https://github.com/smmcat) 开发的 `koishi-plugin-smmcat-studyfa` 进行现代化架构重构与离线化升级，感谢原作者整理的经典音频！
 
-## 📸 触发词图鉴效果预览
+## 📸 效果预览
+
+### 1. 聊天被动触发实机效果
+
+在聊天平台（以 OneBot 协议为例）直接发送词库内的哲学触发词（如“乖乖站好”、“搞死你”、“啊”等），机器人毫秒级快速响应并自动发出原生语音条：
+
+<p align="center">
+  <img src="https://cdn.jsdelivr.net/gh/VincentZyu233/studyfa-vincentzyu-fork@main/docs/preview/preview.%E5%93%B2%E5%AD%A6%E8%AF%AD%E9%9F%B3%E5%8C%85233.png" alt="哲学语音互动实机效果预览" width="720">
+</p>
+
+### 2. 触发词图鉴长图（`/fa .list`）
 
 使用指令 `/fa .list` 时，将自动渲染并发送全量 105 个关键词的暗黑高对比度图鉴长图：
 
 <p align="center">
-  <img src="docs/images/keywords_overview.png" alt="学Fa♂音全量触发词图鉴" width="750">
+  <img src="https://cdn.jsdelivr.net/gh/VincentZyu233/studyfa-vincentzyu-fork@main/docs/images/keywords_overview.png" alt="学Fa♂音全量触发词图鉴" width="750">
 </p>
 
 ## ✨ 核心特色与升级
