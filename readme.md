@@ -15,7 +15,10 @@
 
 **📻 学Fa♂音 哲学语音互动与触发词图鉴插件（VincentZyu Fork） ✨**。基于原版 `koishi-plugin-smmcat-studyfa` 进行纯 TypeScript 重构，并彻底解决原插件依赖单一远程私人服务器失效的顽疾，现已支持全量 205 段音频离线本地化与高可用镜像分发！
 
-> 🙏 **上游致谢**：本项目基于社区原作者 [@smmcat](https://github.com/smmcat) 开发的 `koishi-plugin-smmcat-studyfa` 进行现代化架构重构与离线化升级，感谢原作者提供的灵感与整理的经典音频！
+> ❓ **为什么新开 Fork 独立发布？**
+> 由于目前在 GitHub 与网络上完全搜不到上游原插件的开源代码仓库（上游作者创建了空仓库但未公开源码），想提交 PR 或反馈优化均无门可入；加之原版音频强依赖单一私人轻量服务器随时可能关机失效，为了保障广大群友与用户的长期可用性，并彻底实现**全量离线化、多源镜像容错与触发词可视化长图**，特此开设独立 GitHub 仓库重构维护并发布。
+
+> 🙏 **上游致谢**：本项目基于社区原作者 [@smmcat](https://github.com/smmcat) 开发的 `koishi-plugin-smmcat-studyfa` 进行现代化架构重构与离线化升级，感谢原作者整理的经典音频！
 
 ## 📸 触发词图鉴效果预览
 
@@ -75,6 +78,7 @@ python3 scripts/download_pack.py --proxy http://127.0.0.1:7890 --force
 | `commandAliases` | `string[]` | `fa`、`学fa音`、`哲学` 等 | 主指令别名列表 |
 | `listCommandName` | `string` | `.list` | 触发词列表子指令名 |
 | `listDisplayMode` | `'image' \| 'text'` | `image` | 触发词列表输出模式（图片 / 纯文本） |
+| `dataPath` | `string` | `data/studyfa` | 本地数据存储目录（基于 `ctx.baseDir`，只读锁定） |
 | `autoDownload` | `boolean` | `true` | 启动时是否自动静默下载离线音频资源包 |
 | `useDownloadProxy` | `boolean` | `false` | 下载音频包时是否使用代理 |
 | `downloadProxyUrl` | `string` | `http://127.0.0.1:7890` | 下载使用的代理服务器地址 |

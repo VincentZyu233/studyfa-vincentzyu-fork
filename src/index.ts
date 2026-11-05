@@ -19,6 +19,7 @@ export function apply(ctx: Context, config: Config) {
     config.downloadMirrorUrlList,
     config.useDownloadProxy,
     config.downloadProxyUrl,
+    config.dataPath,
   )
 
   // 1. 启动时后台静默预热下载音频切片包

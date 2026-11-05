@@ -17,9 +17,10 @@ export class AudioManager {
     mirrors: string[],
     private useProxy: boolean = false,
     private proxyUrl: string = 'http://127.0.0.1:7890',
+    dataPath?: string,
   ) {
     this.logger = ctx.logger('studyfa')
-    this.dataDir = path.resolve(ctx.baseDir, 'data', 'studyfa')
+    this.dataDir = path.resolve(ctx.baseDir, dataPath || 'data/studyfa')
     this.audioDir = path.join(this.dataDir, 'audio')
     fs.mkdirSync(this.audioDir, { recursive: true })
 
