@@ -1,0 +1,10 @@
+lib
+dist
+external
+node_modules
+*.log
+tsconfig.tsbuildinfo
+.eslintcache
+.DS_Store
+.idea
+.vscode
