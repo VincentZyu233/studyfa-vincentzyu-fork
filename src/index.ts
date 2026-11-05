@@ -59,13 +59,32 @@ export function apply(ctx: Context, config: Config) {
 
         const audioUrl = audioManager.getAudioUrlForKeyword(keyword, config.audioSourceStrategy)
         if (audioUrl) {
-          logger.debug(`Triggered keyword: [${keyword}], sending audio: ${audioUrl}`)
-          const elements: any[] = []
-          if (config.replyQuote && session.messageId) {
-            elements.push(h.quote(session.messageId))
+          logger.debug(`Triggered keyword: [${keyword}], sending audio...`)
+          try {
+            if (config.replyQuote && session.messageId) {
+              await session.send([h.quote(session.messageId), h.audio(audioUrl)])
+            } else {
+              // 严格对齐上游原版：单发 h.audio
+              await session.send(h.audio(audioUrl))
+            }
+          } catch (err) {
+            logger.warn(`发送哲学语音失败: ${err}`)
+            // 自动使用互补策略（本地失败回退在线，或在线失败回退本地）兜底重试
+            try {
+              const fallbackStrategy = config.audioSourceStrategy === 'local_first' ? 'remote_only' : 'local_only'
+              const fallbackUrl = audioManager.getAudioUrlForKeyword(keyword, fallbackStrategy)
+              if (fallbackUrl && fallbackUrl !== audioUrl) {
+                logger.info(`尝试使用备选策略 [${fallbackStrategy}] 重新发送语音...`)
+                if (config.replyQuote && session.messageId) {
+                  await session.send([h.quote(session.messageId), h.audio(fallbackUrl)])
+                } else {
+                  await session.send(h.audio(fallbackUrl))
+                }
+              }
+            } catch (fallbackErr) {
+              logger.warn(`备选策略重发依然失败: ${fallbackErr}`)
+            }
           }
-          elements.push(h.audio(audioUrl))
-          await session.send(elements)
         }
       }
     }

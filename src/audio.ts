@@ -1,6 +1,5 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { pathToFileURL } from 'node:url'
 import AdmZip from 'adm-zip'
 import { Context, Logger } from 'koishi'
 import { AudioSourceStrategy, DEFAULT_DOWNLOAD_MIRROR_URL_LIST } from './config'
@@ -115,19 +114,30 @@ export class AudioManager {
     const chosenFile = filenames[Math.floor(Math.random() * filenames.length)]
     const localFilePath = path.join(this.audioDir, chosenFile)
     const hasLocal = fs.existsSync(localFilePath) && fs.statSync(localFilePath).size > 0
-    const localUrl = pathToFileURL(localFilePath).href
-    const encodedName = encodeURIComponent(chosenFile)
-    const remoteUrl = `http://smmcat.cn/run/fa/${encodedName}`
+
+    // 本地文件转化为 Base64 Data URL，OneBot 适配器可自动转为 base64:// 协议下发，彻底避免 file:/// 在 OneBot 下报 retcode 1200
+    let localUrl: string | null = null
+    if (hasLocal) {
+      try {
+        const buffer = fs.readFileSync(localFilePath)
+        localUrl = `data:audio/mp3;base64,${buffer.toString('base64')}`
+      } catch (err) {
+        this.logger.warn(`读取本地音频失败 [${chosenFile}]: ${err}`)
+      }
+    }
+
+    // 远程上游直链（完全对齐上游原版 smmcat-studyfa 的 URL 格式）
+    const remoteUrl = `http://smmcat.cn/run/fa/${chosenFile}`
 
     switch (strategy) {
       case 'local_first': // 先 B 再 A（默认推荐）
-        return hasLocal ? localUrl : remoteUrl
+        return localUrl || remoteUrl
 
       case 'remote_first': // 先 A 再 B
-        return remoteUrl || (hasLocal ? localUrl : null)
+        return remoteUrl || localUrl
 
       case 'local_only': // 只有 B（纯离线）
-        if (!hasLocal) {
+        if (!localUrl) {
           this.logger.warn(`[local_only 模式] 缺失本地离线音频文件: ${chosenFile}，请先执行 download_pack.py`)
           return null
         }
@@ -137,7 +147,7 @@ export class AudioManager {
         return remoteUrl
 
       default:
-        return hasLocal ? localUrl : remoteUrl
+        return localUrl || remoteUrl
     }
   }
 }
