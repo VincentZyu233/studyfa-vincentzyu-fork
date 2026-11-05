@@ -150,17 +150,188 @@ html.dark .k-notice-title, .dark .k-notice-title { color: #63b3ed !important; }
 </div>
 </details>
 
-<!-- ================= 折叠卡片 2: 图鉴大图预览 ================= -->
+<!-- ================= 折叠卡片 2: 全量触发词图鉴一览表 ================= -->
 <details class="k-usage-card card-orange" style="${baseDetailsStyle}">
 <summary style="${baseSummaryStyle}">
-  <span>🖼️ 触发词图鉴大图预览</span>
+  <span>📜 全量 105 个触发词图鉴一览表</span>
   <span class="k-fold-hint"><span class="k-fold-state"></span><span class="k-arrow-icon">▼</span></span>
 </summary>
 <div class="k-card-body" style="${baseBodyStyle}">
-  <p>使用 <code>/fa .list</code> 时将发送由 Pillow 精心绘制的暗黑高对比图鉴：</p>
-  <p align="center" style="margin: 10px 0;">
-    <img src="https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork/raw/main/docs/images/keywords_overview.png" alt="触发词图鉴预览" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+  <p style="margin: 0 0 10px;">
+    💡 <b>在聊天中直接发送以下任意词汇即可触发哲学语音</b>；使用指令 <code>/fa .list</code> 也可在群内直接发送暗黑高清图鉴海报大图。
   </p>
+
+  <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
+    <a href="https://github.com/VincentZyu233/studyfa-vincentzyu-fork/blob/main/docs/images/keywords_overview.png?raw=true" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: #24292e; color: #ffffff !important; text-decoration: none; border-radius: 6px; font-size: 13px; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
+      <span>🐙 前往 GitHub 查看高清海报原图 ↗</span>
+    </a>
+    <a href="https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork/raw/main/docs/images/keywords_overview.png" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: #c71d23; color: #ffffff !important; text-decoration: none; border-radius: 6px; font-size: 13px; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
+      <span>🔴 前往 Gitee 查看图片 ↗</span>
+    </a>
+  </div>
+
+  <div style="overflow-x: auto; max-height: 420px; overflow-y: auto; border: 1px solid var(--card-border, rgba(127,127,127,0.25)); border-radius: 8px;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: left;">
+      <thead>
+        <tr style="background: var(--card-summary-bg, rgba(127,127,127,0.12)); border-bottom: 2px solid var(--card-border, rgba(127,127,127,0.25)); position: sticky; top: 0; z-index: 1;">
+          <th style="padding: 8px 10px; width: 20%;">序号 · 触发词</th>
+          <th style="padding: 8px 10px; width: 20%;">序号 · 触发词</th>
+          <th style="padding: 8px 10px; width: 20%;">序号 · 触发词</th>
+          <th style="padding: 8px 10px; width: 20%;">序号 · 触发词</th>
+          <th style="padding: 8px 10px; width: 20%;">序号 · 触发词</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">001</span><code>啊</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">002</span><code>啊啊</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">003</span><code>啊啊啊</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">004</span><code>啊啊啊啊</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">005</span><code>啊焯</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">006</span><code>啊乖乖站好</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">007</span><code>啊哈</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">008</span><code>啊幻想乡啊王</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">009</span><code>啊筋疲力尽</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">010</span><code>啊魔男</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">011</span><code>啊无双大黄瓜</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">012</span><code>啊泄</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">013</span><code>啊谢</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">014</span><code>嗷</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">015</span><code>嗷哒哒</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">016</span><code>嗷来米搞</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">017</span><code>奥义很爽</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">018</span><code>标准开头</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">019</span><code>波秋里</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">020</span><code>勃起至今</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">021</span><code>惩罚中</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">022</span><code>喘息声</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">023</span><code>次</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">024</span><code>大</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">025</span><code>大叫</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">026</span><code>大笑</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">027</span><code>当真</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">028</span><code>裆震</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">029</span><code>裆震磨好斯</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">030</span><code>德国鸡腿堡</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">031</span><code>的销魂叫声</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">032</span><code>动</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">033</span><code>洞子大</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">034</span><code>都在干</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">035</span><code>额</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">036</span><code>恶魔的低语</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">037</span><code>翻一个</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">038</span><code>放铁链</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">039</span><code>搞</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">040</span><code>搞死</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">041</span><code>搞死你</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">042</span><code>格斗声</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">043</span><code>给党</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">044</span><code>乖乖站好</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">045</span><code>柜子</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">046</span><code>哈啊啊啊啊啊</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">047</span><code>哈啊啊啊呃</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">048</span><code>还搞不搞了</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">049</span><code>黑暗深邃幻想</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">050</span><code>幻想乡</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">051</span><code>尻</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">052</span><code>快哉</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">053</span><code>拉大便</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">054</span><code>来</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">055</span><code>来一起拉大便</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">056</span><code>立正站好</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">057</span><code>麦当劳</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">058</span><code>米糠</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">059</span><code>魔男</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">060</span><code>嗯</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">061</span><code>嗯哼嗯嗯</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">062</span><code>喔</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">063</span><code>噢卖萧的</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">064</span><code>噢夜色</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">065</span><code>哦</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">066</span><code>哦哄哄全给党</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">067</span><code>哦卖萧的</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">068</span><code>拍手</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">069</span><code>巧舌如簧</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">070</span><code>去年勃起至今</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">071</span><code>全给党</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">072</span><code>人体唢呐</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">073</span><code>胜利的叫声</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">074</span><code>酸萝卜别吃</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">075</span><code>孙红雷</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">076</span><code>螳螂乱摸</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">077</span><code>螳螂让摸</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">078</span><code>哇</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">079</span><code>哇哈</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">080</span><code>玩游戏</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">081</span><code>王的演讲</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">082</span><code>王老板</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">083</span><code>我要搞死你</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">084</span><code>五舅啊</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">085</span><code>务必让螳螂乱摸</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">086</span><code>泄</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">087</span><code>谢</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">088</span><code>新日暮里</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">089</span><code>漾笑声</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">090</span><code>野兽先辈</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">091</span><code>夜色</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">092</span><code>一起拉大便</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">093</span><code>易建联</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">094</span><code>游戏手柄</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">095</span><code>有点骚</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">096</span><code>有没有很好</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">097</span><code>站好</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">098</span><code>长叫</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">099</span><code>哲学</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">100</span><code>哲学套</code></td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--card-border, rgba(127,127,127,0.15));">
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">101</span><code>这个世界太乱</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">102</span><code>自我介绍</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">103</span><code>自由深邃黑暗</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">104</span><code>asswecan</code></td>
+          <td style="padding: 6px 10px;"><span style="opacity: 0.6; font-size: 11px; margin-right: 6px; font-family: monospace;">105</span><code>faq</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 </details>
 
