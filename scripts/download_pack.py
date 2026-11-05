@@ -31,9 +31,9 @@ from pathlib import Path
 
 DEFAULT_MIRRORS = [
     "https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork/releases/download/v0.1.0",
-    "https://gh-proxy.com/https://github.com/VincentZyuApps/studyfa-vincentzyu-fork/releases/download/v0.1.0",
-    "https://ghproxy.net/https://github.com/VincentZyuApps/studyfa-vincentzyu-fork/releases/download/v0.1.0",
-    "https://github.com/VincentZyuApps/studyfa-vincentzyu-fork/releases/download/v0.1.0",
+    "https://gh-proxy.com/https://github.com/VincentZyu233/studyfa-vincentzyu-fork/releases/download/v0.1.0",
+    "https://ghproxy.net/https://github.com/VincentZyu233/studyfa-vincentzyu-fork/releases/download/v0.1.0",
+    "https://github.com/VincentZyu233/studyfa-vincentzyu-fork/releases/download/v0.1.0",
 ]
 
 

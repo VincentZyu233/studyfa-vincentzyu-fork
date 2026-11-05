@@ -1,9 +1,9 @@
-> 💡 推荐前往 [GitHub](https://github.com/VincentZyuApps/studyfa-vincentzyu-fork) 或 [Gitee](https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork) 阅读 README，排版体验更佳。
+> 💡 推荐前往 [GitHub](https://github.com/VincentZyu233/studyfa-vincentzyu-fork) 或 [Gitee](https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork) 阅读 README，排版体验更佳。
 
 # 📻 koishi-plugin-studyfa-vincentzyu-fork
 
 [![npm](https://img.shields.io/npm/v/koishi-plugin-studyfa-vincentzyu-fork?style=flat-square&logo=npm)](https://www.npmjs.com/package/koishi-plugin-studyfa-vincentzyu-fork)
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/VincentZyuApps/studyfa-vincentzyu-fork)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/VincentZyu233/studyfa-vincentzyu-fork)
 [![Gitee](https://img.shields.io/badge/Gitee-C71D23?style=for-the-badge&logo=gitee&logoColor=white)](https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork)
 [![QQ群](https://img.shields.io/badge/QQ群-1085190201-12B7F5?style=flat-square&logo=qq&logoColor=white)](https://qm.qq.com/q/ZHj33L5cuC)
 
