@@ -38,8 +38,8 @@ export function apply(ctx: Context, config: Config) {
 
   // 3. 注册中间件监听聊天触发词
   ctx.middleware(async (session, next) => {
-    // 档位判定，兼容旧版配置 enableListener
-    const mode = config.triggerMode ?? (config.enableListener === false ? 'disabled' : 'always')
+    // 档位判定，兼容旧版配置 enableListener，默认使用 command_only
+    const mode = config.triggerMode ?? (config.enableListener === false ? 'disabled' : (config.enableListener === true ? 'always' : 'command_only'))
     if (mode === 'disabled') return next()
 
     // 提取纯文本内容
