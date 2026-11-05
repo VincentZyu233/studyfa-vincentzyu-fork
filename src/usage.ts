@@ -89,7 +89,7 @@ html.dark .k-notice-title, .dark .k-notice-title { color: #63b3ed !important; }
     <img src="https://img.shields.io/npm/dm/koishi-plugin-studyfa-vincentzyu-fork?style=flat-square&logo=npm" alt="npm downloads">
   </a>
   <br>
-  <a href="https://github.com/VincentZyuApps/studyfa-vincentzyu-fork" target="_blank">
+  <a href="https://github.com/VincentZyuApps/koishi-plugin-studyfa-vincentzyu-fork" target="_blank">
     <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
   </a>
   <a href="https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork" target="_blank">
@@ -162,7 +162,7 @@ html.dark .k-notice-title, .dark .k-notice-title { color: #63b3ed !important; }
   </p>
 
   <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
-    <a href="https://github.com/VincentZyuApps/studyfa-vincentzyu-fork/blob/main/docs/images/keywords_overview.png?raw=true" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: #24292e; color: #ffffff !important; text-decoration: none; border-radius: 6px; font-size: 13px; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
+    <a href="https://github.com/VincentZyuApps/koishi-plugin-studyfa-vincentzyu-fork/blob/main/docs/images/keywords_overview.png?raw=true" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: #24292e; color: #ffffff !important; text-decoration: none; border-radius: 6px; font-size: 13px; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
       <span>🐙 前往 GitHub 查看高清海报原图 ↗</span>
     </a>
     <a href="https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork/raw/main/docs/images/keywords_overview.png" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: #c71d23; color: #ffffff !important; text-decoration: none; border-radius: 6px; font-size: 13px; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">

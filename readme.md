@@ -1,11 +1,11 @@
-> 💡 推荐前往 [GitHub](https://github.com/VincentZyuApps/studyfa-vincentzyu-fork) 或 [Gitee](https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork) 阅读 README，排版体验更佳。
+> 💡 推荐前往 [GitHub](https://github.com/VincentZyuApps/koishi-plugin-studyfa-vincentzyu-fork) 或 [Gitee](https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork) 阅读 README，排版体验更佳。
 
 # 📻 koishi-plugin-studyfa-vincentzyu-fork
 
 [![npm](https://img.shields.io/npm/v/koishi-plugin-studyfa-vincentzyu-fork?style=flat-square&logo=npm)](https://www.npmjs.com/package/koishi-plugin-studyfa-vincentzyu-fork)
 [![npm-download](https://img.shields.io/npm/dm/koishi-plugin-studyfa-vincentzyu-fork?style=flat-square&logo=npm)](https://npm-stat.com/charts.html?package=koishi-plugin-studyfa-vincentzyu-fork)
 
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/VincentZyuApps/studyfa-vincentzyu-fork)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/VincentZyuApps/koishi-plugin-studyfa-vincentzyu-fork)
 [![Gitee](https://img.shields.io/badge/Gitee-C71D23?style=for-the-badge&logo=gitee&logoColor=white)](https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork)
 
 [![Koishi Forum](https://img.shields.io/badge/Koishi%20Forum-13796-5546A3?style=for-the-badge&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAABU0lEQVR42p2UQSsFYRSGnxnqLuytKWKpKFkQNsS%2FsOHPWPADLCmxU5S7UzYWNrJR7lYiRF2FeWzOMKZ7mXHqNNP5vvP2nu%2B850CY2lP4X1K31ZbaDm%2BpO%2Bpyp5wfAXVEPfRvO1JHf4AVQGbUh7j4EZ4VkrNCXPVRnf3CUBN1SH2KC28VGOV3ntRhNclZHdcAKYM11QR1oVBOXctzFlNgBTC8qmXxPQEegbVeYApIgJT6tg%2F0AdMp0B%2FBpCabK2AAmAAa%2F2GRBft1oBFPkqTAba7LCiAfQC9wClwAY1HJHepuiO29Yrsf1Dn1uiDU3RTYCtTkl1Leg8k9MB4NGgReI28rV3azgyCz0og01Xl1Uz1QX8uCTELm3UbkTF1VJ9Wr0tn3iBSGdjYG0XivE3VN3VD31PM4a3cc2tIGGI0VkTO7rLxGuiy25ejmjfqsvkSXui62TxaK03td4FXTAAAAAElFTkSuQmCC&logoColor=white)](https://forum.koishi.xyz/t/topic/13796)
@@ -32,7 +32,7 @@
 在聊天平台（以 OneBot 协议为例）直接发送词库内的哲学触发词（如“乖乖站好”、“搞死你”、“啊”等），机器人毫秒级快速响应并自动发出原生语音条：
 
 <p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/VincentZyuApps/studyfa-vincentzyu-fork@main/docs/preview/preview.%E5%93%B2%E5%AD%A6%E8%AF%AD%E9%9F%B3%E5%8C%85233.png" alt="哲学语音互动实机效果预览" width="720">
+  <img src="https://cdn.jsdelivr.net/gh/VincentZyuApps/koishi-plugin-studyfa-vincentzyu-fork@main/docs/preview/preview.%E5%93%B2%E5%AD%A6%E8%AF%AD%E9%9F%B3%E5%8C%85233.png" alt="哲学语音互动实机效果预览" width="720">
 </p>
 
 ### 2. 触发词图鉴长图（`/fa .list`）
@@ -40,7 +40,7 @@
 使用指令 `/fa .list` 时，将自动渲染并发送全量 105 个关键词的暗黑高对比度图鉴长图：
 
 <p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/VincentZyuApps/studyfa-vincentzyu-fork@main/docs/images/keywords_overview.png" alt="学Fa♂音全量触发词图鉴" width="750">
+  <img src="https://cdn.jsdelivr.net/gh/VincentZyuApps/koishi-plugin-studyfa-vincentzyu-fork@main/docs/images/keywords_overview.png" alt="学Fa♂音全量触发词图鉴" width="750">
 </p>
 
 ## ✨ 核心特色与升级
