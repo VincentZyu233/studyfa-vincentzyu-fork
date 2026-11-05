@@ -1,0 +1,102 @@
+import { Schema } from 'koishi'
+
+export const DEFAULT_DOWNLOAD_MIRROR_URL_LIST = [
+  'https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork/releases/download/v0.1.0',
+  'https://gh-proxy.com/https://github.com/VincentZyuApps/studyfa-vincentzyu-fork/releases/download/v0.1.0',
+  'https://ghproxy.net/https://github.com/VincentZyuApps/studyfa-vincentzyu-fork/releases/download/v0.1.0',
+  'https://github.com/VincentZyuApps/studyfa-vincentzyu-fork/releases/download/v0.1.0',
+]
+
+export const DEFAULT_KEYWORDS_IMAGE_URL_LIST = [
+  'https://gitee.com/vincent-zyu/studyfa-vincentzyu-fork/raw/main/docs/images/keywords_overview.png',
+  'https://cdn.jsdelivr.net/gh/VincentZyuApps/studyfa-vincentzyu-fork@main/docs/images/keywords_overview.png',
+  'https://raw.githubusercontent.com/VincentZyuApps/studyfa-vincentzyu-fork/main/docs/images/keywords_overview.png',
+]
+
+export interface Config {
+  // ===== 🎙️ 语音监听与响应设置 =====
+  enableListener: boolean // 👂 是否开启群聊触发词被动监听
+  replyProbability: number // 🎲 匹配成功时的响应概率（0.1 ~ 1.0）
+  replyQuote: boolean // 💬 发送哲学语音时是否引用触发消息
+
+  // ===== 📌 指令与别名设置 =====
+  commandName: string // 📌 主指令名称（默认 studyfa）
+  commandAliases: string[] // 🏷️ 主指令别名列表
+  listCommandName: string // 📋 触发词列表子指令名（默认 .list）
+  listCommandAliases: string[] // 📋 触发词列表子指令别名列表
+  listDisplayMode: 'image' | 'text' // 🖼️ 触发词列表展示方式（图片 / 文本）
+
+  // ===== 📦 资源与离线下载设置 =====
+  autoDownload: boolean // 🚀 插件启动时若缺少音频资源包是否自动静默下载
+  useDownloadProxy: boolean // 🌐 下载语音包时是否使用 HTTP/SOCKS 代理
+  downloadProxyUrl: string // 🔌 下载语音包时使用的代理服务器地址（默认 http://127.0.0.1:7890）
+  downloadMirrorUrlList: string[] // 🌐 资源下载镜像基础地址列表
+
+  // ===== 🖼️ 触发词大图候选地址设置 =====
+  keywordsImageUrls: string[] // 🖼️ 触发词图鉴静态图片候选列表（Gitee -> jsDelivr -> GitHub）
+}
+
+export const Config: Schema<Config> = Schema.intersect([
+  // ===== 🎙️ 语音监听与响应设置 =====
+  Schema.object({
+    enableListener: Schema.boolean()
+      .default(true)
+      .description('👂 是否开启群聊与频道消息中的哲学触发词被动监听（匹配后随机发送对应语音）'),
+    replyProbability: Schema.number()
+      .min(0.05)
+      .max(1.0)
+      .step(0.05)
+      .default(1.0)
+      .description('🎲 捕获到触发词时的回复概率（默认 1.0 即 100% 触发；可适当调小避免刷屏）'),
+    replyQuote: Schema.boolean()
+      .default(false)
+      .description('💬 发送语音条时是否引用触发者的消息（OneBot 语音条建议关闭引用以获得最佳体验）'),
+  }).description('🎙️ 语音监听与响应设置 💬'),
+
+  // ===== 📌 指令与别名设置 =====
+  Schema.object({
+    commandName: Schema.string()
+      .default('studyfa')
+      .description('📌 主指令名称（如 studyfa、fa）'),
+    commandAliases: Schema.array(Schema.string())
+      .role('table')
+      .default(['fa', '学fa音', '学FA音', '哲学', '哲学会话'])
+      .description('🏷️ 主指令别名列表（在聊天中可通过任意别名触发）'),
+    listCommandName: Schema.string()
+      .default('.list')
+      .description('📋 触发词列表子指令名称（默认 .list，在主指令后跟随触发，如 /fa .list）'),
+    listCommandAliases: Schema.array(Schema.string())
+      .role('table')
+      .default(['.words', '.wordlist', '.触发词', '.词库', '.列表'])
+      .description('📋 触发词列表子指令别名列表'),
+    listDisplayMode: Schema.union([
+      Schema.const('image').description('🖼️ 渲染图鉴大图（视觉体验极佳，推荐）'),
+      Schema.const('text').description('📝 纯文本排版（轻量省流）'),
+    ])
+      .role('radio')
+      .default('image')
+      .description('🎨 触发词列表指令的默认输出模式'),
+  }).description('📌 指令与展示设置 ⚙️'),
+
+  // ===== 📦 资源与离线下载设置 =====
+  Schema.object({
+    autoDownload: Schema.boolean()
+      .default(true)
+      .description('🚀 插件启动时，若本地缺失离线音频资源是否在后台自动静默下载'),
+    useDownloadProxy: Schema.boolean()
+      .default(false)
+      .description('🌐 下载音频包时是否使用 HTTP/SOCKS 代理'),
+    downloadProxyUrl: Schema.string()
+      .default('http://127.0.0.1:7890')
+      .description('🔌 下载音频包时使用的代理服务器地址（例如 http://127.0.0.1:7890）'),
+    downloadMirrorUrlList: Schema.array(Schema.string())
+      .role('table')
+      .min(1)
+      .default(DEFAULT_DOWNLOAD_MIRROR_URL_LIST)
+      .description('🌐 音频资源包下载镜像基础地址列表，按顺序依次尝试，任一成功即停止（末尾无需加斜杠）'),
+    keywordsImageUrls: Schema.array(Schema.string())
+      .role('table')
+      .default(DEFAULT_KEYWORDS_IMAGE_URL_LIST)
+      .description('🖼️ 触发词图鉴图片的候选 URL 列表（支持配置多个备用源，顺序建议 Gitee ➔ jsDelivr ➔ GitHub）'),
+  }).description('📦 资源镜像与离线下载设置 📥'),
+])
