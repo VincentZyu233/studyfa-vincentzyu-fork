@@ -32,7 +32,7 @@ export interface Config {
   listDisplayMode: 'image' | 'text' // 🖼️ 触发词列表展示方式（图片 / 文本）
 
   // ===== 📦 资源与离线下载设置 =====
-  dataPath?: string // 📁 本地数据存储目录（只读）
+  dataPath?: string[] // 📁 本地数据存储路径切片（只读）
   autoDownload: boolean // 🚀 插件启动时若缺少音频资源包是否自动静默下载
   useDownloadProxy: boolean // 🌐 下载语音包时是否使用 HTTP/SOCKS 代理
   downloadProxyUrl: string // 🔌 下载语音包时使用的代理服务器地址（默认 http://127.0.0.1:7890）
@@ -54,7 +54,11 @@ export const Config: Schema<Config> = Schema.intersect([
       .step(0.05)
       .default(1.0)
       .description('🎲 捕获到触发词时的回复概率（默认 1.0 即 100% 触发；可适当调小避免刷屏）'),
-    replyQuote: Schema.boolean()
+    replyQuote: Schema.union([
+      Schema.const(true).description('🟢 带引用'),
+      Schema.const(false).description('🔴 不带引用'),
+    ])
+      .role('radio')
       .default(false)
       .description('💬 发送语音条时是否引用触发者的消息（OneBot 语音条建议关闭引用以获得最佳体验）'),
     audioSourceStrategy: Schema.union([
@@ -70,7 +74,11 @@ export const Config: Schema<Config> = Schema.intersect([
 
   // ===== 📌 指令与别名设置 =====
   Schema.object({
-    enableQuote: Schema.boolean()
+    enableQuote: Schema.union([
+      Schema.const(true).description('🟢 带引用'),
+      Schema.const(false).description('🔴 不带引用'),
+    ])
+      .role('radio')
       .default(true)
       .description('💬 bot 发送消息时是否引用触发指令的消息'),
     commandName: Schema.string()
@@ -98,10 +106,11 @@ export const Config: Schema<Config> = Schema.intersect([
 
   // ===== 📦 资源与离线下载设置 =====
   Schema.object({
-    dataPath: Schema.string()
+    dataPath: Schema.array(Schema.string())
+      .role('table')
       .disabled()
-      .default('data/studyfa')
-      .description('📁 本地数据存储目录（基于 Koishi 根目录 ctx.baseDir 解析。当前暂时只读不可修改；若有自定义路径需求欢迎提 Issue/PR 或加群反馈）'),
+      .default(['data', 'studyfa'])
+      .description('📁 本地数据存储路径切片（基于 Koishi 根目录 ctx.baseDir 解析。当前暂时只读不可修改；若有自定义路径需求欢迎提 Issue/PR 或加群反馈）'),
     autoDownload: Schema.boolean()
       .default(true)
       .description('🚀 插件启动时，若本地缺失离线音频资源是否在后台自动静默下载'),

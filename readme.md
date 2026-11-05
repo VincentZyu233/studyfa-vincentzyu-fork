@@ -85,7 +85,7 @@ python3 scripts/download_pack.py --proxy http://127.0.0.1:7890 --force
 | `commandAliases` | `string[]` | `fa`、`学fa音`、`哲学` 等 | 主指令别名列表 |
 | `listCommandName` | `string` | `.list` | 触发词列表子指令名 |
 | `listDisplayMode` | `'image' \| 'text'` | `image` | 触发词列表输出模式（图片 / 纯文本） |
-| `dataPath` | `string` | `data/studyfa` | 本地数据存储目录（基于 `ctx.baseDir`，只读锁定） |
+| `dataPath` | `string[]` | `['data', 'studyfa']` | 本地数据存储路径切片（基于 `ctx.baseDir`，只读锁定） |
 | `autoDownload` | `boolean` | `true` | 启动时是否自动静默下载离线音频资源包 |
 | `useDownloadProxy` | `boolean` | `false` | 下载音频包时是否使用代理 |
 | `downloadProxyUrl` | `string` | `http://127.0.0.1:7890` | 下载使用的代理服务器地址 |
