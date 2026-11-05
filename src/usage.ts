@@ -170,10 +170,10 @@ html.dark .k-notice-title, .dark .k-notice-title { color: #63b3ed !important; }
     </a>
   </div>
 
-  <div style="overflow-x: auto; max-height: 420px; overflow-y: auto; border: 1px solid var(--card-border, rgba(127,127,127,0.25)); border-radius: 8px;">
+  <div style="overflow-x: auto; border: 1px solid var(--card-border, rgba(127,127,127,0.25)); border-radius: 8px;">
     <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: left;">
       <thead>
-        <tr style="background: var(--card-summary-bg, rgba(127,127,127,0.12)); border-bottom: 2px solid var(--card-border, rgba(127,127,127,0.25)); position: sticky; top: 0; z-index: 1;">
+        <tr style="background: var(--card-summary-bg, rgba(127,127,127,0.12)); border-bottom: 2px solid var(--card-border, rgba(127,127,127,0.25));">
           <th style="padding: 8px 10px; width: 20%;">序号 · 触发词</th>
           <th style="padding: 8px 10px; width: 20%;">序号 · 触发词</th>
           <th style="padding: 8px 10px; width: 20%;">序号 · 触发词</th>
