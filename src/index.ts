@@ -122,7 +122,28 @@ export function apply(ctx: Context, config: Config) {
             }
           }
         }
+        return
+      } else if (mode === 'command_only') {
+        // 指令显式模式下未找到关键词（选项 1A 友好反馈并拦截）
+        const keywordCount = Object.keys(FA_KEYWORD_MAP).length
+        const notFoundText = `🤔 未找到与 "${keyword}" 匹配的哲学语音条。\n📋 可使用指令 /${config.commandName} ${config.listCommandName} 查看全量 ${keywordCount} 个关键词图鉴~`
+        if (config.enableQuote && session.messageId) {
+          await session.send([h.quote(session.messageId), notFoundText])
+        } else {
+          await session.send(notFoundText)
+        }
+        return
       }
+    } else if (mode === 'command_only' && text) {
+      // 剥离指令后只有特殊标点或符号
+      const keywordCount = Object.keys(FA_KEYWORD_MAP).length
+      const notFoundText = `🤔 未找到与 "${text}" 匹配的哲学语音条。\n📋 可使用指令 /${config.commandName} ${config.listCommandName} 查看全量 ${keywordCount} 个关键词图鉴~`
+      if (config.enableQuote && session.messageId) {
+        await session.send([h.quote(session.messageId), notFoundText])
+      } else {
+        await session.send(notFoundText)
+      }
+      return
     }
 
     return next()

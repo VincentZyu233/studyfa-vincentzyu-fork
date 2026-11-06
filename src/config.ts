@@ -48,8 +48,8 @@ export const Config: Schema<Config> = Schema.intersect([
   // ===== 🎙️ 语音监听与响应设置 =====
   Schema.object({
     triggerMode: Schema.union([
-      Schema.const('command_only').description('🎯 指令显式触发（默认推荐）：必须以指令名（如 fa、/fa、学fa音）开头才触发'),
       Schema.const('always').description('🗣️ 全群自由触发：只要消息匹配到触发词就发送语音（原版体验）'),
+      Schema.const('command_only').description('🎯 指令显式触发（默认推荐）：必须以指令名（如 fa、/fa、学fa音）开头才触发'),
       Schema.const('disabled').description('🚫 彻底禁用：完全不触发哲学语音条（保留词库图鉴等指令）'),
     ])
       .role('radio')

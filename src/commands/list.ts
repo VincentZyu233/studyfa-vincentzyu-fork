@@ -4,32 +4,68 @@ import { Config, DEFAULT_KEYWORDS_IMAGE_URL_LIST } from '../config'
 import { FA_KEYWORD_MAP } from '../data/keywords'
 
 export function registerListCommand(ctx: Context, config: Config, audioManager: AudioManager) {
-  const mainCmd = ctx.command(config.commandName, '学Fa♂音 哲学语音互动')
+  const mainCmd = ctx.command(`${config.commandName} [keyword:text]`, '学Fa♂音 哲学语音互动')
   if (Array.isArray(config.commandAliases)) {
     for (const alias of config.commandAliases) {
       if (alias && alias.trim()) mainCmd.alias(alias.trim())
     }
   }
 
-  // 注册主指令本身行为：若直接调用 /fa 不带参数，显示帮助引导（纯文本模式，支持引用）
-  mainCmd.action(async ({ session }) => {
+  mainCmd.usage(`
+📻 【学Fa♂音 哲学互动】
+💡 使用方式：
+  • 发送关键词语音：fa <关键词>（例如：fa 乖乖站好、fa 搞死你、fa faq）
+  • 查看全量图鉴：fa .list（或 studyfa list）
+`)
+
+  // 注册主指令本身行为
+  mainCmd.action(async ({ session }, keyword) => {
     if (!session) return
     const audioCount = audioManager.getInstalledAudioCount()
     const keywordCount = Object.keys(FA_KEYWORD_MAP).length
+    const aliases = [config.commandName, ...(config.commandAliases || [])].filter(Boolean).join('、')
 
-    const text = [
-      `📻 【学Fa♂音 哲学互动】已就绪`,
-      `📦 词库收录：${keywordCount} 个关键词 · ${audioCount > 0 ? `本地已就绪 ${audioCount} 个音频` : '网络兜底模式'}`,
-      `💡 使用方式：在聊天中直接发送关键词（如 "乖乖站好"、"搞死你"、"faq" 等）即可触发！`,
-      `📋 查看全量图鉴：使用指令 /${config.commandName} ${config.listCommandName}（或 /fa .list）`,
-    ].join('\n')
+    // 1. 若没有输入参数（例如只发了 /fa 或 fa），展示合二为一的风格 1 完整看板
+    if (!keyword || !keyword.trim()) {
+      const text = [
+        `📻 【学Fa♂音 哲学互动】已就绪`,
+        `📦 词库收录：${keywordCount} 个关键词 · ${audioCount > 0 ? `本地已就绪 ${audioCount} 个音频` : '网络兜底模式'}`,
+        `💡 触发指令：/${config.commandName} <关键词>（例如：/${config.commandName} 乖乖站好、/${config.commandName} 搞死你）`,
+        `📋 词库图鉴：使用指令 /${config.commandName} ${config.listCommandName}（或 /fa .list）`,
+        `ℹ️ 指令别名：${aliases}`,
+      ].join('\n')
 
-    const messageElements: any[] = []
-    if (config.enableQuote && session.messageId) {
-      messageElements.push(h.quote(session.messageId))
+      const messageElements: any[] = []
+      if (config.enableQuote && session.messageId) {
+        messageElements.push(h.quote(session.messageId))
+      }
+      messageElements.push(text)
+      await session.send(messageElements)
+      return
     }
-    messageElements.push(text)
-    await session.send(messageElements)
+
+    // 2. 若输入了参数，尝试匹配并发送
+    const cleanKw = keyword.trim().replace(/[^\u4e00-\u9fa5a-zA-Z]/g, '')
+    if (cleanKw && FA_KEYWORD_MAP[cleanKw]) {
+      const audioUrl = audioManager.getAudioUrlForKeyword(cleanKw, config.audioSourceStrategy)
+      if (audioUrl) {
+        if (config.replyQuote && session.messageId) {
+          await session.send([h.quote(session.messageId), h.audio(audioUrl)])
+          return
+        }
+        await session.send(h.audio(audioUrl))
+        return
+      }
+    }
+
+    // 3. 参数未命中关键词（选项 1A：友好指引）
+    const notFoundText = `🤔 未找到与 "${keyword.trim()}" 匹配的哲学语音条。\n📋 可使用指令 /${config.commandName} ${config.listCommandName} 查看全量 ${keywordCount} 个关键词图鉴~`
+    if (config.enableQuote && session.messageId) {
+      await session.send([h.quote(session.messageId), notFoundText])
+      return
+    }
+    await session.send(notFoundText)
+    return
   })
 
   // 注册子指令：列出所有触发词
